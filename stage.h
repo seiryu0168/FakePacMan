@@ -22,7 +22,12 @@ public:
 
     //開放
     void Release() override;
-
+    /// <summary>
+    /// マップのタイプ
+    /// </summary>
+    /// <param name="x">position : x</param>
+    /// <param name="z">position : z</param>
+    /// <returns></returns>
     int GetMap(int x,int z) { return map_[z][x]; }
 };
 
