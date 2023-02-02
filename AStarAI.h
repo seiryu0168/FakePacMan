@@ -1,14 +1,16 @@
 #pragma once
 #include"Node.h"
 #include"Engine/Direct3D.h"
+#include"Engine/CsvReader.h"
 #include<list>
 class AStarAI
 {
 private:
 	int map[15][15]; 
+	Node* nodeMap_[15][15];
 	std::list<Node*> openNodeList_;
 	std::list<Node*> closedNodeList_;
-
+	CsvReader csv;
 	XMFLOAT3 targetPos_;
 	struct dir
 	{
@@ -23,8 +25,9 @@ public:
 
 	void Init();
 	void Update();
-	void SetPos(XMFLOAT3 targetPos,XMFLOAT3 startPos);
+	void SetTargetPos(XMFLOAT3 targetPos);
 	void Calc(XMFLOAT3 targetPos, XMFLOAT3 startPos);
 	void Open(Node* pN);
+	void ResetNode();
 };
 

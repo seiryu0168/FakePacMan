@@ -1,7 +1,15 @@
 #pragma once
 #include"Engine/GameObject.h"
+#include"AStarAI.h"
+
+class player;
+
 class Enemy : public GameObject
 {
+private:
+	AStarAI AI_;
+	player* pPlayer;
+public:
 	Enemy(GameObject* parent);
 	~Enemy();
 	void Initialize() override;
