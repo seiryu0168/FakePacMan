@@ -48,3 +48,8 @@ void Node::SetStatus(STATUS st)
 {
 	status_ = st;
 }
+
+Node* Node::GetParent()
+{
+	return pParentNode_;
+}

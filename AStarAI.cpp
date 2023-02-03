@@ -40,18 +40,16 @@ void AStarAI::Init()
 
 }
 
-void AStarAI::Update()
-{
-}
-
-void AStarAI::SetTargetPos(XMFLOAT3 targetPos)
+void AStarAI::SetPos(XMFLOAT3 targetPos, XMFLOAT3 startPos)
 {
 	targetPos_ = targetPos;
+	startPos_ = startPos;
 }
 
 void AStarAI::Calc(XMFLOAT3 targetPos, XMFLOAT3 startPos)
 {
-	SetTargetPos(targetPos);
+	ResetNode();
+	SetPos(targetPos,startPos);
 	//スタートノードのコスト計算
 	int mCost = 0;
 	int hCost = ((int)targetPos.x - (int)startPos.x) + ((14-(int)targetPos.z) - (14-(int)startPos.z));
@@ -71,12 +69,20 @@ void AStarAI::Calc(XMFLOAT3 targetPos, XMFLOAT3 startPos)
 				baseNode = (*itr);
 			}
 		}
-		if (!openNodeList_.empty())
+		if (baseNode->GetStatus() != STATUS::CLOSE)
+		{
 			Open(baseNode);
+			if (!openNodeList_.empty())
+			{
+				baseNode = *(openNodeList_.begin());
+			}
+		}
 		else
 			break;
 
 	}
+
+	GetPath();
 }
 
 void AStarAI::Open(Node* pN)
@@ -92,7 +98,7 @@ void AStarAI::Open(Node* pN)
 			nodeMap_[posZ][posX]->GetStatus()==STATUS::NONE)
 		{
 			int mCost = pN->GetmCost() + 1;
-			int hCost = (targetPos_.x - nodeMap_[posZ][posX]->GetPos().x) + ((14-targetPos_.z) - (14-nodeMap_[posZ][posX]->GetPos().z));
+			int hCost = abs((int)targetPos_.x - nodeMap_[posZ][posX]->GetPos().x) + abs((14-(int)targetPos_.z) - (nodeMap_[posZ][posX]->GetPos().z));
 			nodeMap_[posZ][posX]->SetStatus(STATUS::OPEN);
 			nodeMap_[posZ][posX]->SetCost(mCost, hCost);
 			nodeMap_[posZ][posX]->SetParent(pN);
@@ -112,6 +118,20 @@ void AStarAI::Open(Node* pN)
 	closedNodeList_.push_back(pN);
 }
 
+void AStarAI::GetPath()
+{
+	Node* pathNode = nodeMap_[14 - (int)targetPos_.z][(int)targetPos_.x];
+	while (true)
+	{
+
+		path_.push_back({(int)pathNode->GetPos().x, (int)pathNode->GetPos().z});
+		if (pathNode == nodeMap_[14 - (int)startPos_.z][(int)startPos_.x])
+			break;
+		pathNode = pathNode->GetParent();
+
+	}
+}
+
 void AStarAI::ResetNode()
 {
 	for (int z = 0; z < csv.GetHeight(); z++)
@@ -128,4 +148,7 @@ void AStarAI::ResetNode()
 				nodeMap_[z][x] = nullptr;
 		}
 	}
+	openNodeList_.clear();
+	closedNodeList_.clear();
+	path_.clear();
 }

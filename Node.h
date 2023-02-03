@@ -35,5 +35,6 @@ public:
 	int GetmCost() { return mCost_; }
 	int GethCost() { return hCost_; }
 	STATUS GetStatus() { return status_; }
+	Node* GetParent();
 };
 

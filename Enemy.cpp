@@ -13,7 +13,7 @@ Enemy::~Enemy()
 void Enemy::Initialize()
 {	
 	pPlayer = (player*)FindObject("player");
-	transform_.position_ = { 1,0,1 };
+	transform_.position_ = { 13,0,13 };
 	AI_.Init();
 }
 
