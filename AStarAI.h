@@ -15,6 +15,9 @@ private:
 	CsvReader csv;
 	XMFLOAT3 targetPos_;
 	XMFLOAT3 startPos_;
+	int zOffset_;
+	int pathCount_;
+	bool chaseFlag_;
 	struct dir
 	{
 		int dirX;
@@ -30,8 +33,8 @@ public:
 	void SetPos(XMFLOAT3 targetPos,XMFLOAT3 startPos);
 	void Calc(XMFLOAT3 targetPos, XMFLOAT3 startPos);
 	void Open(Node* pN);
-	XMFLOAT3 GetpathPos();
-	void GetPath();
+	XMFLOAT3 GetPath();
+	void CreatePath();
 	void ResetNode();
 };
 

@@ -23,7 +23,7 @@ void stage::Initialize()
     {
         for (int x = 0; x < 15; x++)
         {
-            map_[14-z][x] = csv.GetValue(z, x);
+            map_[z][x] = csv.GetValue(x, z);
         }
     }
     hModel_[0] = Model::Load("floor.fbx");
