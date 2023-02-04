@@ -49,8 +49,6 @@ void AStarAI::SetPos(XMFLOAT3 targetPos, XMFLOAT3 startPos)
 
 void AStarAI::Calc(XMFLOAT3 targetPos, XMFLOAT3 startPos)
 {
-	startPos.x -= 0.5f;
-	startPos.x -= 0.5f;
 	if (chaseFlag_ == false)
 	{
 

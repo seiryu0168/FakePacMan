@@ -27,8 +27,6 @@ void Enemy::Update()
 	if (time_ % 10 == 0)
 	{
 		transform_.position_ = AI_.GetPath();
-		transform_.position_.x += 0.5f;
-		transform_.position_.z += 0.5f;
 	}
 }
 
