@@ -18,6 +18,7 @@ private:
 	int zOffset_;
 	int pathCount_;
 	bool chaseFlag_;
+
 	struct dir
 	{
 		int dirX;
@@ -35,6 +36,8 @@ public:
 	void Open(Node* pN);
 	XMFLOAT3 GetPath();
 	void CreatePath();
+	void SetChaseFlag(bool fChase) { chaseFlag_ = fChase; }
+	float GetChaseStap() { return (float)(25-pathCount_) / path_.size(); }
 	void ResetNode();
 };
 

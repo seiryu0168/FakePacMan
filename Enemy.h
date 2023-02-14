@@ -11,12 +11,14 @@ private:
 	player* pPlayer;
 	int hModel_;
 	int time_;
+	bool onScerch_;
 public:
 	Enemy(GameObject* parent);
 	~Enemy();
 	void Initialize() override;
 	void Update() override;
 	void Draw() override;
+	float CulcDistance(XMFLOAT3 targetPos, XMFLOAT3 startPos);
 	void Release() override;
 };
 

@@ -49,10 +49,9 @@ void AStarAI::SetPos(XMFLOAT3 targetPos, XMFLOAT3 startPos)
 
 void AStarAI::Calc(XMFLOAT3 targetPos, XMFLOAT3 startPos)
 {
+
 	if (chaseFlag_ == false)
 	{
-
-
 		ResetNode();
 		SetPos(targetPos, startPos);
 		//スタートノードのコスト計算
@@ -89,7 +88,11 @@ void AStarAI::Calc(XMFLOAT3 targetPos, XMFLOAT3 startPos)
 
 		CreatePath();
 	}
+
+	
 }
+
+
 
 void AStarAI::Open(Node* pN)
 {
@@ -133,11 +136,13 @@ XMFLOAT3 AStarAI::GetPath()
 	}
 	XMFLOAT3 position(path_[pathCount_].x,0, path_[pathCount_].y);
 	pathCount_--;
-	if (pathCount_ < 0)
+	pathCount_ = max(0, pathCount_);
+	
+	if (pathCount_ == 0)
 	{
-		pathCount_ = max(0, pathCount_);
 		chaseFlag_ = false;
 	}
+
 	return position;
 }
 

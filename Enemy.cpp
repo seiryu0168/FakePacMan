@@ -3,7 +3,8 @@
 #include"player.h"
 Enemy::Enemy(GameObject* parent)
 	:GameObject(parent,"Enemy"),
-	time_(0)
+	time_(0),
+	onScerch_(false)
 {
 }
 
@@ -26,7 +27,10 @@ void Enemy::Update()
 	AI_.Calc(pPlayer->GetPosition(), transform_.position_);
 	if (time_ % 10 == 0)
 	{
+
 		transform_.position_ = AI_.GetPath();
+		if (CulcDistance(pPlayer->GetPosition(),transform_.position_)>=10.0f&&AI_.GetChaseStap()>=0.5f)
+			AI_.SetChaseFlag(false);
 	}
 }
 
@@ -36,6 +40,11 @@ void Enemy::Draw()
 	Model::Draw(hModel_);
 }
 
+float Enemy::CulcDistance(XMFLOAT3 targetPos, XMFLOAT3 startPos)
+{
+	float a = sqrt((targetPos.x - startPos.x) * (targetPos.x - startPos.x) + (targetPos.z - startPos.z) * (targetPos.z - startPos.z));
+	return a;
+}
 void Enemy::Release()
 {
 }
