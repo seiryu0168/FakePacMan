@@ -153,6 +153,7 @@
     <ClCompile Include="Red.cpp" />
     <ClCompile Include="stage.cpp" />
     <ClCompile Include="TestScene.cpp" />
+    <ClCompile Include="Yellow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AStarAI.h" />
@@ -181,8 +182,10 @@
     <ClInclude Include="player.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="Red.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stage.h" />
     <ClInclude Include="TestScene.h" />
+    <ClInclude Include="Yellow.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Debug3D.hlsl">
@@ -198,6 +201,9 @@
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VS</EntryPointName>
       <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VS</EntryPointName>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GameBaseDx11.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,16 +2,14 @@
 #include"Behavior.h"
 
 class Enemy;
-class AStarAI;
-
-class Red : public Behavior
+class Yellow : public Behavior
 {
 private:
-
 	enum class STATE
 	{
 		CHASE = 0,
 		SEARCH,
+		ESCAPE,
 	};
 
 	AStarAI AI_;
@@ -19,13 +17,13 @@ private:
 	int time_;
 	STATE status_;
 	Enemy* enemy_;
-
 public:
-	Red();
-	Red(player* pPlayer,Enemy* pEnemy);
+	Yellow();
+	Yellow(player* pPlayer, Enemy* pEnemy);
 	void Init(Enemy* enemy);
 	void Update() override;
 	void ChaseMode();
 	void SearchMode();
+	void EscapeMode();
 };
 

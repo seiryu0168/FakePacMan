@@ -92,6 +92,7 @@
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Red.cpp" />
     <ClCompile Include="Behavior.cpp" />
+    <ClCompile Include="Yellow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -160,6 +161,8 @@
     <ClInclude Include="Node.h" />
     <ClInclude Include="Red.h" />
     <ClInclude Include="Behavior.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Yellow.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">
@@ -171,5 +174,10 @@
     <FxCompile Include="Assets\Shader\Debug3D.hlsl">
       <Filter>02Shader</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GameBaseDx11.rc">
+      <Filter>リソース ファイル</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

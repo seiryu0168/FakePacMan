@@ -20,7 +20,6 @@ void Enemy::Initialize()
 	hModel_ = Model::Load("Enemy.fbx");
 	assert(hModel_ >= 0);
 	//AI_.Init();
-	bh_->Init(this);
 
 }
 

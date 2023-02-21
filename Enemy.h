@@ -19,7 +19,7 @@ private:
 	int hModel_;
 	int time_;
 	STATE status_;
-	Red* bh_;
+	Behavior* bh_;
 public:
 	Enemy(GameObject* parent);
 	~Enemy();
@@ -28,7 +28,7 @@ public:
 	void Draw() override;
 	float CulcDistance(XMFLOAT3 targetPos, XMFLOAT3 startPos);
 	void Release() override;
-	void SetCharactor(Red* b) { bh_ = b; }
+	void SetCharactor(Behavior* b) { bh_ = (Behavior*)b; }
 	void ChaseMode();
 	void SearchMode();
 };

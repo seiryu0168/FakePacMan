@@ -8,8 +8,8 @@ private:
 
 public:
 	virtual void Update() {};
-	virtual void ChaseMode() {};
-	virtual void SearchMode() {};
+	//virtual void ChaseMode() {};
+	//virtual void SearchMode() {};
 	float CulcDistance(XMFLOAT3 targetPos, XMFLOAT3 startPos);
 };
 

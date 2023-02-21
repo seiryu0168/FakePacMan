@@ -3,6 +3,7 @@
 #include"stage.h"
 #include"Enemy.h"
 #include"Red.h"
+#include"Yellow.h"
 #include"Engine/Camera.h"
 
 PlayScene::PlayScene(GameObject* parent)
@@ -20,7 +21,7 @@ void PlayScene::Initialize()
 	pE->SetCharactor(new Red(pP,pE));
 	pE->SetPosition(XMFLOAT3(1, 0, 13));
 	pE = Instantiate<Enemy>(this);
-	pE->SetCharactor(new Red(pP, pE));
+	pE->SetCharactor(new Yellow(pP, pE));
 	pE->SetPosition(XMFLOAT3(13, 0, 13));
 	Camera::SetPosition(XMFLOAT3(7.5f, 15, 0));
 	Camera::SetTarget(XMFLOAT3(7.5f, 0, 7.5f));
