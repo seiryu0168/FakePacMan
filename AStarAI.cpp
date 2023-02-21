@@ -12,10 +12,14 @@ AStarAI::~AStarAI()
 
 void AStarAI::Init()
 {
-	csv.Load("map.csv");
-	for (int z = 0; z < csv.GetHeight(); z++)
+	csv.Load("Map2.csv");
+	stageWidth_ = csv.GetWidth();
+	stageHeight_ = csv.GetHeight();
+	assert(stageWidth_ == 15);
+	assert(stageHeight_ == 15);
+	for (int z = 0; z < stageHeight_; z++)
 	{
-		for (int x = 0; x < csv.GetWidth(); x++)
+		for (int x = 0; x < stageWidth_; x++)
 		{
 			map[zOffset_ -z][x] = -(csv.GetValue(x, z));
 			if (map[14-z][x] == 0)
@@ -26,7 +30,7 @@ void AStarAI::Init()
 				nodeMap_[zOffset_ -z][x] = nullptr;
 		}
 	}
-	int a[15][15] = {0};
+	/*int a[15][15] = {0};
 
 	for (int i = 0; i < 15; i++)
 	{
@@ -37,7 +41,7 @@ void AStarAI::Init()
 			else
 				a[i][j] = 1;
 		}
-	}
+	}*/
 
 }
 
@@ -158,6 +162,15 @@ void AStarAI::CreatePath()
 		pathNode = pathNode->GetParent();
 
 	}
+}
+
+bool AStarAI::CanMove(XMFLOAT3 pos)
+{
+	if (map[14 - (int)pos.z][(int)pos.x] == 0)
+	{
+		return true;
+	}
+	return false;
 }
 
 void AStarAI::ResetNode()

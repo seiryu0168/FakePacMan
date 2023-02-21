@@ -15,6 +15,8 @@ private:
 	CsvReader csv;
 	XMFLOAT3 targetPos_;
 	XMFLOAT3 startPos_;
+	int stageWidth_;
+	int stageHeight_;
 	int zOffset_;
 	int pathCount_;
 	bool chaseFlag_;
@@ -37,7 +39,8 @@ public:
 	XMFLOAT3 GetPath();
 	void CreatePath();
 	void SetChaseFlag(bool fChase) { chaseFlag_ = fChase; }
-	float GetChaseStap() { return (float)(25-pathCount_) / path_.size(); }
+	float GetChaseStap() { return (float)(path_.size()-pathCount_) / (float)path_.size(); }
+	bool CanMove(XMFLOAT3 pos);
 	void ResetNode();
 };
 

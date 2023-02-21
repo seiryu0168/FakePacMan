@@ -90,6 +90,8 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="AStarAI.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Red.cpp" />
+    <ClCompile Include="Behavior.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -156,6 +158,8 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="AStarAI.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="Red.h" />
+    <ClInclude Include="Behavior.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

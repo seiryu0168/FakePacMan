@@ -18,7 +18,9 @@ void stage::Initialize()
 {
     
     CsvReader csv;
-    csv.Load("map.csv");
+    csv.Load("Map2.csv");
+    int a = csv.GetHeight();
+    int b = csv.GetWidth();
     for (int z = 0; z < 15; z++)
     {
         for (int x = 0; x < 15; x++)

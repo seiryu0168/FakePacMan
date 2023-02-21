@@ -2,6 +2,7 @@
 #include"player.h"
 #include"stage.h"
 #include"Enemy.h"
+#include"Red.h"
 #include"Engine/Camera.h"
 
 PlayScene::PlayScene(GameObject* parent)
@@ -12,9 +13,15 @@ PlayScene::PlayScene(GameObject* parent)
 //èâä˙âª
 void PlayScene::Initialize()
 {
+	player* pP;
 	Instantiate<stage>(this);
-	Instantiate<player>(this);
-	Instantiate<Enemy>(this);
+	pP = Instantiate<player>(this);
+	Enemy* pE = Instantiate<Enemy>(this);
+	pE->SetCharactor(new Red(pP,pE));
+	pE->SetPosition(XMFLOAT3(1, 0, 13));
+	pE = Instantiate<Enemy>(this);
+	pE->SetCharactor(new Red(pP, pE));
+	pE->SetPosition(XMFLOAT3(13, 0, 13));
 	Camera::SetPosition(XMFLOAT3(7.5f, 15, 0));
 	Camera::SetTarget(XMFLOAT3(7.5f, 0, 7.5f));
 }
