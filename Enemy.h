@@ -18,6 +18,7 @@ private:
 	player* pPlayer;
 	int hModel_;
 	int time_;
+	bool arrive_;
 	STATE status_;
 	Behavior* bh_;
 public:

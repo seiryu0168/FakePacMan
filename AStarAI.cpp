@@ -53,7 +53,12 @@ void AStarAI::SetPos(XMFLOAT3 targetPos, XMFLOAT3 startPos)
 
 void AStarAI::Calc(XMFLOAT3 targetPos, XMFLOAT3 startPos)
 {
-
+	startPos.x = (int)(startPos.x + 0.5f);
+	startPos.z = (int)(startPos.z + 0.5f);
+	if (nodeMap_[(int)(zOffset_ - startPos.z)][(int)startPos.x] == NULL)
+	{
+		int a = 0;
+	}
 	if (chaseFlag_ == false)
 	{
 		ResetNode();
@@ -154,7 +159,6 @@ void AStarAI::CreatePath()
 	Node* pathNode = nodeMap_[zOffset_-(int)targetPos_.z][(int)targetPos_.x];
 	while (true)
 	{
-
 		path_.push_back({(int)pathNode->GetPos().x, 14-(int)pathNode->GetPos().z});
 		if (pathNode == nodeMap_[zOffset_ - (int)startPos_.z][(int)startPos_.x])
 			break;

@@ -27,7 +27,7 @@ void PlayScene::Initialize()
 	pE = Instantiate<Enemy>(this);
 	pE->SetCharactor(new Blue(pP, pE));
 	pE->SetPosition(XMFLOAT3(13, 0, 5));
-	Camera::SetPosition(XMFLOAT3(7.5f, 15, 0));
+	Camera::SetPosition(XMFLOAT3(7.5f, 20, 7.4f));
 	Camera::SetTarget(XMFLOAT3(7.5f, 0, 7.5f));
 }
 

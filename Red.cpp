@@ -18,7 +18,8 @@ Red::Red(player* pPlayer, Enemy* pEnemy)
 	enemy_(pEnemy),
 	status_(STATE::SEARCH),
 	time_(0),
-	vMove_(XMVectorSet(0,0,0,0))
+	vMove_(XMVectorSet(0,0,0,0)),
+	arrive_(false)
 {
 	AI_.Init();
 }
@@ -46,9 +47,9 @@ void Red::Update()
 			break;
 		}
 	}
-	if()
+	else
 	{
-	
+
 	}
 }
 
@@ -56,9 +57,8 @@ void Red::SearchMode()
 {
 	int x = 0;
 	int z = 0;
-	bool moveFlag = false;
 
-	if (moveFlag == false)
+	if (arrive_ == false)
 	{
 		for (int i = 0; i < 10; i++)
 		{
@@ -67,26 +67,23 @@ void Red::SearchMode()
 			if (AI_.CanMove(XMFLOAT3(x, 0, z)))
 			{
 				AI_.Calc(XMFLOAT3(x, 0, z), enemy_->GetPosition());
-				moveFlag = true;
+				arrive_ = true;
 				break;
 			}
 		}
 	}
 
-	if (arrive_)
-	{
-		nextPosX = AI_.GetPath().x;
-		nextPosZ = AI_.GetPath().z;
+	XMFLOAT3 nextPos = AI_.GetPath();
 
-		vMove_ = XMVectorSet(nextPosX - enemy_->GetPosition().x, 0, nextPosZ - enemy_->GetPosition().z,0);
-		vMove_ = XMVector3Normalize(vMove_);
-
-		if (AI_.GetChaseStap() >= 1.0f)
+		vMove_ = XMVectorSet(nextPos.x - enemy_->GetPosition().x, 0, nextPos.z - enemy_->GetPosition().z,0);
+		vMove_ = vMove_/(float)INTERVAL;
+		SetVector(vMove_);
+		if (AI_.GetChaseStep() >= 1.0f)
 		{
-			float i = AI_.GetChaseStap();
-			moveFlag = false;
+			float i = AI_.GetChaseStep();
+			arrive_ = false;
 		}
-	}
+	
 	if (CulcDistance(pPlayer_->GetPosition(), enemy_->GetPosition()) < 5)
 	{
 		float dis = CulcDistance(pPlayer_->GetPosition(), enemy_->GetPosition());
@@ -94,14 +91,22 @@ void Red::SearchMode()
 	}
 }
 
+void Red::Move()
+{
+}
+
 void Red::ChaseMode()
 {
 	AI_.Calc(pPlayer_->GetPosition(), enemy_->GetPosition());
-	nextPosX = AI_.GetPath().x;
-	nextPosZ = AI_.GetPath().z;
-	if (CulcDistance(pPlayer_->GetPosition(), enemy_->GetPosition()) > 5.0f && AI_.GetChaseStap() >= 0.5f)
+	XMFLOAT3 nextPos = AI_.GetPath();
+
+	vMove_ = XMVectorSet(nextPos.x - enemy_->GetPosition().x, 0, nextPos.z - enemy_->GetPosition().z, 0);
+	vMove_ = vMove_ / (float)INTERVAL;
+	SetVector(vMove_);
+	if (CulcDistance(pPlayer_->GetPosition(), enemy_->GetPosition()) > 7.0f && AI_.GetChaseStep() >= 0.5f)
 	{
 		AI_.SetChaseFlag(false);
+		arrive_ = false;
 		status_ = STATE::SEARCH;
 	}
 }

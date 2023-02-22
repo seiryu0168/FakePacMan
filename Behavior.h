@@ -5,10 +5,12 @@
 class Behavior
 {
 private:
+	XMVECTOR vMove_;
 public:
 	Behavior();
 	virtual void Update() {};
-	//virtual void ChaseMode() {};
+	 void SetVector(XMVECTOR vec);
+	 XMVECTOR GetVector() { return vMove_; };
 	//virtual void SearchMode() {};
 	float CulcDistance(XMFLOAT3 targetPos, XMFLOAT3 startPos);
 };

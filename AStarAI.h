@@ -39,7 +39,7 @@ public:
 	XMFLOAT3 GetPath();
 	void CreatePath();
 	void SetChaseFlag(bool fChase) { chaseFlag_ = fChase; }
-	float GetChaseStap() { return (float)(path_.size()-pathCount_) / (float)path_.size(); }
+	float GetChaseStep() { return (float)(path_.size()-pathCount_) / (float)path_.size(); }
 	bool CanMove(XMFLOAT3 pos);
 	void ResetNode();
 };

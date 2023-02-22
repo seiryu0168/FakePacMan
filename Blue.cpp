@@ -1,5 +1,9 @@
 #include "Blue.h"
 
+namespace
+{
+	static const int INTERVAL = 10;
+}
 Blue::Blue()
 	:pPlayer_(nullptr),
 	time_(0),
@@ -12,7 +16,8 @@ Blue::Blue(player* pPlayer, Enemy* pEnemy)
 	:pPlayer_(pPlayer),
 	enemy_(pEnemy),
 	status_(STATE::SEARCH),
-	time_(0)
+	time_(0),
+	arrive_(false)
 {
 	AI_.Init();
 	ChangePatrolRoute();
@@ -48,10 +53,13 @@ void Blue::PatrolMode()
 	int targetPoint = nowPoint % 4;
 	AI_.Calc(XMFLOAT3(point[targetPoint].x,0, point[targetPoint].z), enemy_->GetPosition());
 	
-	enemy_->SetPosition(AI_.GetPath());
-	
+	XMFLOAT3 nextPos = AI_.GetPath();
+	XMVECTOR vMove;
+	vMove = XMVectorSet(nextPos.x - enemy_->GetPosition().x, 0, nextPos.z - enemy_->GetPosition().z, 0);
+	vMove = vMove / (float)INTERVAL;
+	SetVector(vMove);
 	//目的地に着いたら次の目的地に向かう
-	if (enemy_->GetPosition().x == point[targetPoint].x && enemy_->GetPosition().z == point[targetPoint].z)
+	if (AI_.GetChaseStep()>=1.0f)
 	{
 		AI_.SetChaseFlag(false);
 		nowPoint++;

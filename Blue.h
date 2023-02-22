@@ -19,6 +19,7 @@ private:
 		int z;
 	};
 	AStarAI AI_;
+	bool arrive_;
 	player* pPlayer_;
 	int time_;
 	int nowPoint;

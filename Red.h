@@ -30,5 +30,8 @@ public:
 	void Update() override;
 	void ChaseMode();
 	void SearchMode();
+	void Move();
+	int GetNextPosX() { return nextPosX; }
+	int GetNextPosZ() { return nextPosZ; }
 };
 

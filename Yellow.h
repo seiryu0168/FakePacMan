@@ -13,6 +13,7 @@ private:
 	};
 
 	AStarAI AI_;
+	bool arrive_;
 	player* pPlayer_;
 	int time_;
 	STATE status_;

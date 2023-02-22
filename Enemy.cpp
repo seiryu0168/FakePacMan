@@ -5,7 +5,8 @@ Enemy::Enemy(GameObject* parent)
 	:GameObject(parent,"Enemy"),
 	time_(0),
 	status_(STATE::SEARCH),
-	bh_(nullptr)
+	bh_(nullptr),
+	arrive_(false)
 {
 }
 
@@ -26,6 +27,7 @@ void Enemy::Initialize()
 void Enemy::Update()
 {
 	bh_->Update();
+	XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) + bh_->GetVector());
 	
 }
 
@@ -49,7 +51,7 @@ void Enemy::ChaseMode()
 {
 	AI_.Calc(pPlayer->GetPosition(), transform_.position_);
 		transform_.position_ = AI_.GetPath();
-		if (CulcDistance(pPlayer->GetPosition(), transform_.position_) > 5.0f && AI_.GetChaseStap() >= 0.5f)
+		if (CulcDistance(pPlayer->GetPosition(), transform_.position_) > 5.0f && AI_.GetChaseStep() >= 0.5f)
 		{
 			AI_.SetChaseFlag(false);
 			status_ = STATE::SEARCH;
@@ -80,9 +82,9 @@ void Enemy::SearchMode()
 	if (moveFlag)
 	{
 		transform_.position_ = AI_.GetPath();
-		if (AI_.GetChaseStap() >= 1.0f)
+		if (AI_.GetChaseStep() >= 1.0f)
 		{
-			float i = AI_.GetChaseStap();
+			float i = AI_.GetChaseStep();
 			moveFlag = false;
 		}
 	}

@@ -1,7 +1,13 @@
 #include "Behavior.h"
 
 Behavior::Behavior()
+	:vMove_(XMVectorSet(0,0,0,0))
 {
+}
+
+void Behavior::SetVector(XMVECTOR vec)
+{
+	vMove_ = vec;
 }
 
 float Behavior::CulcDistance(XMFLOAT3 targetPos, XMFLOAT3 startPos)

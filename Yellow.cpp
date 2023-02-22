@@ -1,6 +1,9 @@
 #include "Yellow.h"
 #include"Enemy.h"
-
+namespace
+{
+	static const int INTERVAL = 10;
+}
 Yellow::Yellow()
 	:pPlayer_(nullptr),
 	time_(0),
@@ -11,7 +14,8 @@ Yellow::Yellow()
 
 Yellow::Yellow(player* pPlayer, Enemy* pEnemy)
 	:pPlayer_(pPlayer),
-	enemy_(pEnemy)
+	enemy_(pEnemy),
+	arrive_(false)
 {
 	AI_.Init();
 }
@@ -47,10 +51,16 @@ void Yellow::ChaseMode()
 {
 	//経路を計算
 	AI_.Calc(pPlayer_->GetPosition(), enemy_->GetPosition());
-	enemy_->SetPosition(AI_.GetPath());
-	if (CulcDistance(pPlayer_->GetPosition(), enemy_->GetPosition()) < 4.0f && AI_.GetChaseStap() >= 0.5f)
+	XMFLOAT3 nextPos = AI_.GetPath();
+
+	XMVECTOR vMove;
+	vMove = XMVectorSet(nextPos.x - enemy_->GetPosition().x, 0, nextPos.z - enemy_->GetPosition().z, 0);
+	vMove = vMove / (float)INTERVAL;
+	SetVector(vMove);
+	if (CulcDistance(pPlayer_->GetPosition(), enemy_->GetPosition()) < 4.0f && AI_.GetChaseStep() >= 0.5f)
 	{
 		AI_.SetChaseFlag(false);
+		arrive_ = true;
 		status_ = STATE::ESCAPE;
 	}
 }
@@ -62,7 +72,7 @@ void Yellow::SearchMode()
 	bool moveFlag = false;
 
 	//フラグが立ってたら
-	if (moveFlag == false)
+	if (arrive_)
 	{
 		for (int i = 0; i < 10; i++)
 		{
@@ -71,19 +81,24 @@ void Yellow::SearchMode()
 			if (AI_.CanMove(XMFLOAT3(x, 0, z)))
 			{
 				AI_.Calc(XMFLOAT3(x, 0, z), enemy_->GetPosition());
-				moveFlag = true;
+				arrive_ = false;
 				break;
 			}
 		}
 	}
 
-	if (moveFlag)
+	if (arrive_==false)
 	{
-		enemy_->SetPosition(AI_.GetPath());
-		if (AI_.GetChaseStap() >= 1.0f)
+		XMFLOAT3 nextPos = AI_.GetPath();
+
+		XMVECTOR vMove;
+		vMove = XMVectorSet(nextPos.x - enemy_->GetPosition().x, 0, nextPos.z - enemy_->GetPosition().z, 0);
+		vMove = vMove / (float)INTERVAL;
+		SetVector(vMove);
+		if (AI_.GetChaseStep() >= 1.0f)
 		{
-			float i = AI_.GetChaseStap();
-			moveFlag = false;
+			float i = AI_.GetChaseStep();
+			arrive_ = true;
 		}
 	}
 
@@ -91,6 +106,7 @@ void Yellow::SearchMode()
 	if (CulcDistance(pPlayer_->GetPosition(), enemy_->GetPosition()) < 6)
 	{
 		float dis = CulcDistance(pPlayer_->GetPosition(), enemy_->GetPosition());
+		arrive_ = false;
 		status_ = STATE::CHASE;
 	}
 }
@@ -99,9 +115,8 @@ void Yellow::EscapeMode()
 {
 	int x = 0;
 	int z = 0;
-	bool moveFlag = false;
 	
-	if (moveFlag == false)
+	if (arrive_)
 	{
 
 		//次に移動するところを探す
@@ -114,20 +129,27 @@ void Yellow::EscapeMode()
 			if (AI_.CanMove(XMFLOAT3(x, 0, z)) && CulcDistance(XMFLOAT3(x, 0, z), pPlayer_->GetPosition()) >= 6)
 			{
 				AI_.Calc(XMFLOAT3(x, 0, z), enemy_->GetPosition());
-				moveFlag = true;
+				arrive_ = false;
 				break;
 			}
 		}
 	}
 
-	//動けるならうごいて、目的地に着いたらフラグを降ろす
-	if (moveFlag)
+	//動けるなら動いて、目的地に着いたらフラグを降ろす
+	if (arrive_==false)
 	{
-		enemy_->SetPosition(AI_.GetPath());
-		if (AI_.GetChaseStap() >= 1.0f)
+		XMFLOAT3 nextPos = AI_.GetPath();
+
+		XMVECTOR vMove;
+		vMove = XMVectorSet(nextPos.x - enemy_->GetPosition().x, 0, nextPos.z - enemy_->GetPosition().z, 0);
+		vMove = vMove / (float)INTERVAL;
+		SetVector(vMove);
+
+		if (AI_.GetChaseStep() >= 1.0f)
 		{
-			float i = AI_.GetChaseStap();
-			moveFlag = false;
+			float i = AI_.GetChaseStep();
+			arrive_ = true;
+
 		}
 	}
 
@@ -135,6 +157,7 @@ void Yellow::EscapeMode()
 	if (CulcDistance(pPlayer_->GetPosition(), enemy_->GetPosition()) > 8)
 	{
 		float dis = CulcDistance(pPlayer_->GetPosition(), enemy_->GetPosition());
+		arrive_=false;
 		status_ = STATE::SEARCH;
 	}
 }
