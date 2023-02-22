@@ -13,12 +13,15 @@ private:
 		CHASE = 0,
 		SEARCH,
 	};
-
 	AStarAI AI_;
+	bool arrive_;
 	player* pPlayer_;
 	int time_;
 	STATE status_;
 	Enemy* enemy_;
+	int nextPosX;
+	int nextPosZ;
+	XMVECTOR vMove_;
 
 public:
 	Red();

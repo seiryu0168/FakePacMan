@@ -1,6 +1,10 @@
 #include "Red.h"
 #include"Enemy.h"
 
+namespace
+{
+	static const int INTERVAL = 10;
+}
 Red::Red()
 	:pPlayer_(nullptr),
 	time_(0),
@@ -13,7 +17,8 @@ Red::Red(player* pPlayer, Enemy* pEnemy)
 	:pPlayer_(pPlayer),
 	enemy_(pEnemy),
 	status_(STATE::SEARCH),
-	time_(0)
+	time_(0),
+	vMove_(XMVectorSet(0,0,0,0))
 {
 	AI_.Init();
 }
@@ -26,7 +31,8 @@ void Red::Init(Enemy* enemy)
 void Red::Update()
 {
 	time_++;
-	if (time_ % 10 == 0)
+
+	if (time_ % INTERVAL == 0)
 	{
 		switch (status_)
 		{
@@ -39,6 +45,10 @@ void Red::Update()
 		default:
 			break;
 		}
+	}
+	if()
+	{
+	
 	}
 }
 
@@ -63,16 +73,20 @@ void Red::SearchMode()
 		}
 	}
 
-	if (moveFlag)
+	if (arrive_)
 	{
-		enemy_->SetPosition(AI_.GetPath());
+		nextPosX = AI_.GetPath().x;
+		nextPosZ = AI_.GetPath().z;
+
+		vMove_ = XMVectorSet(nextPosX - enemy_->GetPosition().x, 0, nextPosZ - enemy_->GetPosition().z,0);
+		vMove_ = XMVector3Normalize(vMove_);
+
 		if (AI_.GetChaseStap() >= 1.0f)
 		{
 			float i = AI_.GetChaseStap();
 			moveFlag = false;
 		}
 	}
-
 	if (CulcDistance(pPlayer_->GetPosition(), enemy_->GetPosition()) < 5)
 	{
 		float dis = CulcDistance(pPlayer_->GetPosition(), enemy_->GetPosition());
@@ -83,7 +97,8 @@ void Red::SearchMode()
 void Red::ChaseMode()
 {
 	AI_.Calc(pPlayer_->GetPosition(), enemy_->GetPosition());
-	enemy_->SetPosition(AI_.GetPath());
+	nextPosX = AI_.GetPath().x;
+	nextPosZ = AI_.GetPath().z;
 	if (CulcDistance(pPlayer_->GetPosition(), enemy_->GetPosition()) > 5.0f && AI_.GetChaseStap() >= 0.5f)
 	{
 		AI_.SetChaseFlag(false);

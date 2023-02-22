@@ -26,6 +26,7 @@ void Enemy::Initialize()
 void Enemy::Update()
 {
 	bh_->Update();
+	
 }
 
 void Enemy::Draw()
