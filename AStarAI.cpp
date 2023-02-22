@@ -91,9 +91,7 @@ void AStarAI::Calc(XMFLOAT3 targetPos, XMFLOAT3 startPos)
 		}
 
 		CreatePath();
-	}
-
-	
+	}	
 }
 
 
@@ -138,15 +136,16 @@ XMFLOAT3 AStarAI::GetPath()
 		chaseFlag_ = true;
 		pathCount_ = path_.size() - 1;
 	}
-	XMFLOAT3 position(path_[pathCount_].x,0, path_[pathCount_].y);
-	pathCount_--;
-	pathCount_ = max(0, pathCount_);
-	
+
 	if (pathCount_ == 0)
 	{
 		chaseFlag_ = false;
 	}
 
+	XMFLOAT3 position(path_[pathCount_].x,0, path_[pathCount_].y);
+	pathCount_--;
+	pathCount_ = max(0, pathCount_);
+	
 	return position;
 }
 

@@ -20,8 +20,8 @@ void player::Initialize()
     pStg_ = (stage*)FindObject("stage");
     hModel_ = Model::Load("pacman.fbx");
     assert(hModel_ >= 0);
-    transform_.position_.x = 1.5;
-    transform_.position_.z = 1.5;
+    transform_.position_.x = 1.0;
+    transform_.position_.z = 1.0;
 }
 
 //çXêV
@@ -53,8 +53,10 @@ void player::Update()
 //ï`âÊ
 void player::Draw()
 {
-
-    Model::SetTransform(hModel_, transform_);
+    Transform trans = transform_;
+    trans.position_.x -= 0.5f;
+    trans.position_.z -= 0.5f;
+    Model::SetTransform(hModel_, trans);
     Model::Draw(hModel_);
 }
 

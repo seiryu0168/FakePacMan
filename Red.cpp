@@ -11,7 +11,9 @@ Red::Red()
 
 Red::Red(player* pPlayer, Enemy* pEnemy)
 	:pPlayer_(pPlayer),
-	enemy_(pEnemy)
+	enemy_(pEnemy),
+	status_(STATE::SEARCH),
+	time_(0)
 {
 	AI_.Init();
 }

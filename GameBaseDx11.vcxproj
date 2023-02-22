@@ -127,6 +127,7 @@
   <ItemGroup>
     <ClCompile Include="AStarAI.cpp" />
     <ClCompile Include="Behavior.cpp" />
+    <ClCompile Include="Blue.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Engine\Audio.cpp" />
     <ClCompile Include="Engine\BoxCollider.cpp" />
@@ -158,6 +159,7 @@
   <ItemGroup>
     <ClInclude Include="AStarAI.h" />
     <ClInclude Include="Behavior.h" />
+    <ClInclude Include="Blue.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Engine\Audio.h" />
     <ClInclude Include="Engine\BoxCollider.h" />

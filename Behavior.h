@@ -5,8 +5,8 @@
 class Behavior
 {
 private:
-
 public:
+	Behavior();
 	virtual void Update() {};
 	//virtual void ChaseMode() {};
 	//virtual void SearchMode() {};
