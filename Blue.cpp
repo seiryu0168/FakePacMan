@@ -22,6 +22,7 @@ Blue::Blue(player* pPlayer, Enemy* pEnemy)
 	AI_.Init();
 	ChangePatrolRoute();
 	srand((unsigned int)time_t(NULL));
+	SetModelName("EnemyBlue");
 }
 
 void Blue::Update()

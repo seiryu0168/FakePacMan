@@ -21,6 +21,7 @@ Red::Red(player* pPlayer, Enemy* pEnemy)
 	vMove_(XMVectorSet(0,0,0,0)),
 	arrive_(false)
 {
+	SetModelName("EnemyRed");
 	AI_.Init();
 }
 
@@ -46,10 +47,6 @@ void Red::Update()
 		default:
 			break;
 		}
-	}
-	else
-	{
-
 	}
 }
 

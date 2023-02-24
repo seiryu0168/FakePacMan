@@ -1,7 +1,8 @@
 #include "Behavior.h"
 
 Behavior::Behavior()
-	:vMove_(XMVectorSet(0,0,0,0))
+	:vMove_(XMVectorSet(0,0,0,0)),
+	modelName_("")
 {
 }
 

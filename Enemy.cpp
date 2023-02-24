@@ -6,7 +6,8 @@ Enemy::Enemy(GameObject* parent)
 	time_(0),
 	status_(STATE::SEARCH),
 	bh_(nullptr),
-	arrive_(false)
+	arrive_(false),
+	hModel_(-1)
 {
 }
 
@@ -18,23 +19,28 @@ void Enemy::Initialize()
 {	
 	pPlayer = (player*)FindObject("player");
 	//transform_.position_ = { 13,0,13 };
-	hModel_ = Model::Load("Enemy.fbx");
-	assert(hModel_ >= 0);
-	//AI_.Init();
-
+	//hModel_ = Model::Load("Enemy.fbx");
+	//assert(hModel_ >= 0);
 }
 
 void Enemy::Update()
 {
+	if (hModel_ < 0)
+	{
+		hModel_ = Model::Load(bh_->GetModelName()+".fbx");
+		assert(hModel_ >= 0);
+	}
 	bh_->Update();
 	XMStoreFloat3(&transform_.position_, XMLoadFloat3(&transform_.position_) + bh_->GetVector());
-	
 }
 
 void Enemy::Draw()
 {
-	Model::SetTransform(hModel_, transform_);
-	Model::Draw(hModel_);
+	if (hModel_ >= 0)
+	{
+		Model::SetTransform(hModel_, transform_);
+		Model::Draw(hModel_);
+	}
 }
 
 float Enemy::CulcDistance(XMFLOAT3 targetPos, XMFLOAT3 startPos)

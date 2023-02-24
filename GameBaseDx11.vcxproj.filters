@@ -94,6 +94,7 @@
     <ClCompile Include="Behavior.cpp" />
     <ClCompile Include="Yellow.cpp" />
     <ClCompile Include="Blue.cpp" />
+    <ClCompile Include="Gray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -165,6 +166,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Yellow.h" />
     <ClInclude Include="Blue.h" />
+    <ClInclude Include="Gray.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

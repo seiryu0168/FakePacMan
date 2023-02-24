@@ -70,7 +70,7 @@ void player::CharactoeControl()
 
     if (pStg_->GetMap((int)(transform_.position_.x), (int)(transform_.position_.z + 0.4f)) == 0)
     {
-        if (Input::IsKey(DIK_W))
+        if (Input::IsKey(DIK_W)||Input::GetPadStickL().y>=0.2)
         {
             transform_.position_.z += speed;
         }
@@ -78,14 +78,14 @@ void player::CharactoeControl()
 
     if (pStg_->GetMap((int)(transform_.position_.x), (int)(transform_.position_.z - 0.4f)) == 0)
     {
-        if (Input::IsKey(DIK_S))
+        if (Input::IsKey(DIK_S) || Input::GetPadStickL().y <= -0.2)
         {
             transform_.position_.z -= speed;
         }
     }
     if (pStg_->GetMap((int)(transform_.position_.x-0.4f), (int)(transform_.position_.z)) == 0)
     {
-        if (Input::IsKey(DIK_A))
+        if (Input::IsKey(DIK_A) || Input::GetPadStickL().x <= -0.2)
         {
             transform_.position_.x -= speed;
         }
@@ -93,7 +93,7 @@ void player::CharactoeControl()
 
     if (pStg_->GetMap((int)(transform_.position_.x+0.4f), (int)(transform_.position_.z)) == 0)
     {
-        if (Input::IsKey(DIK_D))
+        if (Input::IsKey(DIK_D) || Input::GetPadStickL().x >= 0.2)
         {
             transform_.position_.x += speed;
         }

@@ -17,6 +17,7 @@ Yellow::Yellow(player* pPlayer, Enemy* pEnemy)
 	enemy_(pEnemy),
 	arrive_(false)
 {
+	SetModelName("EnemyYellow");
 	AI_.Init();
 }
 
