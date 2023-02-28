@@ -54,35 +54,7 @@ void Gray::Update()
 
 void Gray::SleepMode()
 {
-	//int x = 0;
-	//int z = 0;
-	//
-	//if (arrive_ == false)
-	//{
-	//	for (int i = 0; i < 10; i++)
-	//	{
-	//		x = rand() % 14;
-	//		z = rand() % 14;
-	//		if (AI_.CanMove(XMFLOAT3(x, 0, z)))
-	//		{
-	//			AI_.Calc(XMFLOAT3(x, 0, z), enemy_->GetPosition());
-	//			arrive_ = true;
-	//			break;
-	//		}
-	//	}
-	//}
-	//
-	//XMFLOAT3 nextPos = AI_.GetPath();
-	//
-	//vMove_ = XMVectorSet(nextPos.x - enemy_->GetPosition().x, 0, nextPos.z - enemy_->GetPosition().z, 0);
-	//vMove_ = vMove_ / (float)INTERVAL;
-	//SetVector(vMove_);
-	//if (AI_.GetChaseStep() >= 1.0f)
-	//{
-	//	float i = AI_.GetChaseStep();
-	//	arrive_ = false;
-	//}
-
+	//Q‚Ä‚é‚Ì‚ÅƒvƒŒƒCƒ„[‚Æ‚Ì‹——£‚¾‚¯‘ª‚é
 	if (CulcDistance(pPlayer_->GetPosition(), enemy_->GetPosition()) < 5&&CalcLimit())
 	{
 		chaseStart_ = time_;

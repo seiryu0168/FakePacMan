@@ -107,7 +107,7 @@ void Yellow::SearchMode()
 	if (CulcDistance(pPlayer_->GetPosition(), enemy_->GetPosition()) < 6)
 	{
 		float dis = CulcDistance(pPlayer_->GetPosition(), enemy_->GetPosition());
-		arrive_ = false;
+		arrive_ = true;
 		status_ = STATE::CHASE;
 	}
 }
@@ -150,7 +150,6 @@ void Yellow::EscapeMode()
 		{
 			float i = AI_.GetChaseStep();
 			arrive_ = true;
-
 		}
 	}
 
@@ -158,7 +157,7 @@ void Yellow::EscapeMode()
 	if (CulcDistance(pPlayer_->GetPosition(), enemy_->GetPosition()) > 8)
 	{
 		float dis = CulcDistance(pPlayer_->GetPosition(), enemy_->GetPosition());
-		arrive_=false;
+		arrive_=true;
 		status_ = STATE::SEARCH;
 	}
 }

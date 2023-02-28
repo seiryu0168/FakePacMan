@@ -59,6 +59,7 @@ void Blue::PatrolMode()
 	vMove = XMVectorSet(nextPos.x - enemy_->GetPosition().x, 0, nextPos.z - enemy_->GetPosition().z, 0);
 	vMove = vMove / (float)INTERVAL;
 	SetVector(vMove);
+
 	//目的地に着いたら次の目的地に向かう
 	if (AI_.GetChaseStep()>=1.0f)
 	{

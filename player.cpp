@@ -20,8 +20,8 @@ void player::Initialize()
     pStg_ = (stage*)FindObject("stage");
     hModel_ = Model::Load("pacman.fbx");
     assert(hModel_ >= 0);
-    transform_.position_.x = 1.0;
-    transform_.position_.z = 1.0;
+    transform_.position_.x = 1.5;
+    transform_.position_.z = 1.5;
 }
 
 //çXêV
